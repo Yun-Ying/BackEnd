@@ -16,6 +16,7 @@ class ShoppingcartController extends Controller
         $user_id = $request->input('user_id');
         $shoppingcarts = Shoppingcart::where('user_id', $user_id)->get();
         $products = array();
+
         foreach ($shoppingcarts as $shoppingcart) {
             $temp  = Product::find($shoppingcart->product_id);
             array_push($products, $temp);
