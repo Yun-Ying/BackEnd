@@ -11,7 +11,6 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         Log::info($request->all());
-
         return response()->json([
             'success' => true,
         ]);

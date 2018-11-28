@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Level;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -32,10 +33,14 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $levels = Level::all();
 
         $data = [
             'categories' => $categories,
+            'levels' => $levels,
         ];
+
+
 
         return view('products.create', $data);
     }
@@ -48,12 +53,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd($request->all());
+
         $this->validate($request, [
             'name' => 'required',
             'price' => 'required|integer',
-            'unit' => 'required',
             'description' => 'required',
         ]);
+
+        // dd($request->all());
 
         Product::create($request->all());
 

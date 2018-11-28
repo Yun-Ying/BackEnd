@@ -16,11 +16,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('updated_at', 'desc')
-            ->take(10)
-            ->get();
+        $products = Product::orderBy('id')->get();
 
-        return ProductResource::collection($products);
+
+        return response()->json($products);
     }
 
     /**
