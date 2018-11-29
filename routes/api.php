@@ -56,16 +56,16 @@ Route::get('users/{x}', 'Api\ShoppingcartController@fake_index');
 
 //order part to test and debug
 //create
-    Route::get('debug/orders/{x}', 'Api\OrderController@debug_create');
+Route::get('debug/orders/{x}', 'Api\OrderController@debug_create');
 
-    //show
-    Route::get('debug/orders/{user_id}', 'Api\OrderController@debug_show');
+//show
+Route::get('debug/orders_show/{user_id}', 'Api\OrderController@debug_show');
 
-    //index(only for admin)
-    Route::get('debug/orders', 'Api\OrderController@debug_index');
+//index(only for admin)
+Route::get('debug/orders', 'Api\OrderController@debug_index');
 
-    //delete
-    Route::delete('debug/orders', 'Api\OrderController@debug_destroy');
+//delete
+Route::delete('debug/orders', 'Api\OrderController@debug_destroy');
 
 
 
