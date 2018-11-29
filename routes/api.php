@@ -30,9 +30,16 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', 'Api\AuthController@logout');
     Route::get('me', 'Api\AuthController@me');
     Route::post('refresh', 'Api\AuthController@refresh');
-    Route::post('putincart', 'Api\ShoppingcartController@store');
-    Route::post('deletecart', 'Api\ShoppingcartController@destroy');
-    Route::post('shoppingcart', 'Api\ShoppingcartController@index');
+
+    //shopping cart part
+    //create
+    Route::post('shopping_carts', 'Api\ShoppingcartController@store');
+    //delete
+    Route::delete('shopping_carts', 'Api\ShoppingcartController@destroy');
+    //show not OKAY yet
+    Route::get('shopping_carts/{user_id}', 'Api\ShoppingcartController@show');
+    //update
+
 
     //order part
 
@@ -48,11 +55,10 @@ Route::middleware('auth:api')->group(function () {
     //delete
     Route::delete('orders', 'Api\OrderController@destroy');
 });
-
-Route::get('deletecart_debug/{x}/{y}', 'Api\ShoppingcartController@fake_destroy');
-Route::get('putincart_debug/{user}/{product}', 'Api\ShoppingcartController@fake_store');
+Route::get('deletecart_debug/{x}', 'Api\ShoppingcartController@fake_destroy');
+Route::get('putincart_debug/{user}/{product}/{x}', 'Api\ShoppingcartController@fake_store');
 Route::get('users/{x}', 'Api\ShoppingcartController@fake_index');
-
+Route::get('shopping_carts/update_debug/{user}/{product}/{quantity}', 'Api\ShoppingcartController@fake_update');
 
 //order part to test and debug
 //create
