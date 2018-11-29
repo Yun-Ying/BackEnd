@@ -23,7 +23,7 @@ class OrderController extends Controller
         ]);
     }
 
-
+    //done
     public function create(Request $request)
     {
 
@@ -81,7 +81,7 @@ class OrderController extends Controller
         ]);
     }
 
-    //done
+    //done test
     public function debug_create($user_id)
     {
 
@@ -132,45 +132,44 @@ class OrderController extends Controller
         $order->save();
 
         //delete shoppingcart move must be done
-        //still remain undone as this is a debug mode
+        foreach ($shoppingcarts as $shoppingcart) {
+            $shoppingcart->delete();
+        }
 
-        dd($order);
-
-
+        return response()->json([
+            'message' => 'create order successful',
+        ]);
     }
 
-
-    public function show()
-    {
-        
-    }
-
-
-    public function debug_show($user_id)
+    //done
+    public function show($user_id)
     {
         //now you get a order array
         $user_orders = Order::where('user_id', $user_id)->get();
 
-        $user_email = User::find($user_id)->email;
-        $user_name = User::find($user_id)->name;
-
         $orders = array();
 
-        foreach ($user_orders as $user_order)
+        foreach ($user_orders as $order)
         {
+            //user email
+            $user_email = User::find($order->user_id)->email;
+
+            //user name
+            $user_name = User::find($order->user_id)->name;
+
             //order_id
-            $order_id = $user_order->id;
+            $order_id = $order->id;
 
             //created_date
-            $created_date = $user_order->created_at;
+            $created_date = $order->created_at;
 
             //total_price
-            $total_price = $user_order->total_price;
+            $total_price = $order->total_price;
 
             //products array
             $products = array();
             $a = 0;
-            foreach ($user_order->product_ids as $product_id)
+            foreach ($order->product_ids as $product_id)
             {
                 $product = Product::find($product_id);
                 $temp_product =[
@@ -183,8 +182,8 @@ class OrderController extends Controller
                     "file_path" => $product->file_path,
                     "created_at" => $product->created_at,
                     "updated_at" => $product->updated_at,
-                    "quantity" => $user_order->quantities[$a],
-                    "total_price" => $user_order->quantities[$a] * $product->price,
+                    "quantity" => $order->quantities[$a],
+                    "total_price" => $order->quantities[$a] * $product->price,
                 ];
 
                 array_push($products, $temp_product);
@@ -193,6 +192,8 @@ class OrderController extends Controller
 
             //object created
             $temp_order = [
+                'user_name' => $user_name,
+                'user_email' => $user_email,
                 'order_id' => $order_id,
                 'created_date' =>$created_date,
                 'total_price' => $total_price,
@@ -205,31 +206,240 @@ class OrderController extends Controller
         }
 
         return response()->json([
-            'user_name' => $user_name,
-            'user_email' => $user_email,
+            'orders' => $orders,
+        ]);
+    }
+
+    //done test
+    public function debug_show($user_id)
+    {
+        //now you get a order array
+        $user_orders = Order::where('user_id', $user_id)->get();
+
+        $orders = array();
+
+        foreach ($user_orders as $order)
+        {
+            //user email
+            $user_email = User::find($order->user_id)->email;
+
+            //user name
+            $user_name = User::find($order->user_id)->name;
+
+            //order_id
+            $order_id = $order->id;
+
+            //created_date
+            $created_date = $order->created_at;
+
+            //total_price
+            $total_price = $order->total_price;
+
+            //products array
+            $products = array();
+            $a = 0;
+            foreach ($order->product_ids as $product_id)
+            {
+                $product = Product::find($product_id);
+                $temp_product =[
+                    "product_id" => $product->id,
+                    "name" => $product->name,
+                    "single_price" => $product->price,
+                    "description" => $product->description,
+                    "category_name" => Category::find($product->category_id)->name,
+                    "level_name" => Level::find($product->level_id)->name,
+                    "file_path" => $product->file_path,
+                    "created_at" => $product->created_at,
+                    "updated_at" => $product->updated_at,
+                    "quantity" => $order->quantities[$a],
+                    "total_price" => $order->quantities[$a] * $product->price,
+                ];
+
+                array_push($products, $temp_product);
+                $a++;
+            }
+
+            //object created
+            $temp_order = [
+                'user_name' => $user_name,
+                'user_email' => $user_email,
+                'order_id' => $order_id,
+                'created_date' =>$created_date,
+                'total_price' => $total_price,
+                'products' => $products,
+            ];
+
+
+            array_push($orders, $temp_order);
+
+        }
+
+        return response()->json([
             'orders' => $orders,
         ]);
 
 
     }
 
+    //only for admin
     public function index()
     {
-        
+        $all_orders = Order::all();
+
+        $orders = array();
+
+        foreach ($all_orders as $order)
+        {
+            //user email
+            $user_email = User::find($order->user_id)->email;
+
+            //user name
+            $user_name = User::find($order->user_id)->name;
+
+            //order_id
+            $order_id = $order->id;
+
+            //created_date
+            $created_date = $order->created_at;
+
+            //total_price
+            $total_price = $order->total_price;
+
+            //products array
+            $products = array();
+            $a = 0;
+            foreach ($order->product_ids as $product_id)
+            {
+                $product = Product::find($product_id);
+                $temp_product =[
+                    "product_id" => $product->id,
+                    "name" => $product->name,
+                    "single_price" => $product->price,
+                    "description" => $product->description,
+                    "category_name" => Category::find($product->category_id)->name,
+                    "level_name" => Level::find($product->level_id)->name,
+                    "file_path" => $product->file_path,
+                    "created_at" => $product->created_at,
+                    "updated_at" => $product->updated_at,
+                    "quantity" => $order->quantities[$a],
+                    "total_price" => $order->quantities[$a] * $product->price,
+                ];
+
+                array_push($products, $temp_product);
+                $a++;
+            }
+
+            //object created
+            $temp_order = [
+                'user_name' => $user_name,
+                'user_email' => $user_email,
+                'order_id' => $order_id,
+                'created_date' =>$created_date,
+                'total_price' => $total_price,
+                'products' => $products,
+            ];
+
+
+            array_push($orders, $temp_order);
+
+        }
+
+        return response()->json([
+            'orders' => $orders,
+        ]);
     }
 
+    //only for admin
+    //done test
     public function debug_index()
     {
-        
+
+        $all_orders = Order::all();
+
+        $orders = array();
+
+        foreach ($all_orders as $order)
+        {
+            //user email
+            $user_email = User::find($order->user_id)->email;
+
+            //user name
+            $user_name = User::find($order->user_id)->name;
+
+            //order_id
+            $order_id = $order->id;
+
+            //created_date
+            $created_date = $order->created_at;
+
+            //total_price
+            $total_price = $order->total_price;
+
+            //products array
+            $products = array();
+            $a = 0;
+            foreach ($order->product_ids as $product_id)
+            {
+                $product = Product::find($product_id);
+                $temp_product =[
+                    "product_id" => $product->id,
+                    "name" => $product->name,
+                    "single_price" => $product->price,
+                    "description" => $product->description,
+                    "category_name" => Category::find($product->category_id)->name,
+                    "level_name" => Level::find($product->level_id)->name,
+                    "file_path" => $product->file_path,
+                    "created_at" => $product->created_at,
+                    "updated_at" => $product->updated_at,
+                    "quantity" => $order->quantities[$a],
+                    "total_price" => $order->quantities[$a] * $product->price,
+                ];
+
+                array_push($products, $temp_product);
+                $a++;
+            }
+
+            //object created
+            $temp_order = [
+                'user_name' => $user_name,
+                'user_email' => $user_email,
+                'order_id' => $order_id,
+                'created_date' =>$created_date,
+                'total_price' => $total_price,
+                'products' => $products,
+            ];
+
+
+            array_push($orders, $temp_order);
+
+        }
+
+        return response()->json([
+            'orders' => $orders,
+        ]);
     }
 
-    public function destroy()
+    //not done, since front end request not sure yet
+    public function destroy(Request $request)
     {
-        
+        $order = Order::find($request);
+
+        $order->delete();
+
+        return response()->json([
+            'message' => 'delete order successful',
+        ]);
     }
 
-    public function debug_destroy()
+    //done test
+    public function debug_destroy($order_id)
     {
-        
+        $order = Order::find($order_id);
+
+        $order->delete();
+
+        return response()->json([
+            'message' => 'delete order successful',
+        ]);
     }
 }

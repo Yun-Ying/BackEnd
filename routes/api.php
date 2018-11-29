@@ -55,23 +55,25 @@ Route::middleware('auth:api')->group(function () {
     //delete
     Route::delete('orders', 'Api\OrderController@destroy');
 });
+
+
 Route::get('deletecart_debug/{x}', 'Api\ShoppingcartController@fake_destroy');
 Route::get('putincart_debug/{user}/{product}/{x}', 'Api\ShoppingcartController@fake_store');
 Route::get('users/{x}', 'Api\ShoppingcartController@fake_index');
 Route::get('shopping_carts/update_debug/{user}/{product}/{quantity}', 'Api\ShoppingcartController@fake_update');
 
 //order part to test and debug
-//create
+//create //done
 Route::get('debug/orders/{x}', 'Api\OrderController@debug_create');
 
-//show
+//show //done
 Route::get('debug/orders_show/{user_id}', 'Api\OrderController@debug_show');
 
-//index(only for admin)
+//index(only for admin) //done
 Route::get('debug/orders', 'Api\OrderController@debug_index');
 
 //delete
-Route::delete('debug/orders', 'Api\OrderController@debug_destroy');
+Route::get('debug/orders_delete/{order_id}', 'Api\OrderController@debug_destroy');
 
 
 
