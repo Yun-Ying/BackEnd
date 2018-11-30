@@ -13,5 +13,6 @@ class Shoppingcart extends Model
         'user_id',
         'product_id',
         'quantity',
+        'price',
     ];
 }

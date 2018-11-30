@@ -44,10 +44,15 @@ class ShoppingcartController extends Controller
 
     public function store(Request $request)
     {
+        $user_id = $request->input('user_id');
+        $product_id = $request->input('product_id');
+        $quantity = $request->input('quantity');
+        $product_price = Product::where('product_id', $product_id)->value('price');
         Shoppingcart::create([
-            'user_id' => $request->input('user_id'),
-            'product_id' => $request->input('product_id'),
-            'quantity' => $request->input('quantity')
+            'user_id' => $user_id,
+            'product_id' => $product_id,
+            'quantity' => $quantity,
+            'price' => $product_price * $quantity
         ]);
         return response()->json([
             'success' => true,
@@ -59,7 +64,8 @@ class ShoppingcartController extends Controller
         Shoppingcart::create([
             'user_id' => $user->id,
             'product_id' => $product->id,
-            'quantity' => $quantity
+            'quantity' => $quantity,
+            'price' => $product->price * $quantity
         ]);
         return response()->json([
             'success' => true,
@@ -98,20 +104,57 @@ class ShoppingcartController extends Controller
         $products = array();
         foreach ($shoppingcarts as $shoppingcart) {
             $temp  = Product::find($shoppingcart->product_id);
-            array_push($products, $temp);
+            $temp_product =[
+                "shoppingcart_id" => $shoppingcart->id,
+                "product_id" => $temp->id,
+                "product_name" => $temp->name,
+                "product_description" => $temp->description,
+                "category_id" => $temp->category_id,
+                "level_id" => $temp->level_id,
+                "file_path" => $temp->file_path,
+                'quantity' => $shoppingcart->quantity,
+                "total_price" => $shoppingcart->price,
+            ];
+            //$temp  = Product::find($shoppingcart->product_id);
+            array_push($products, $temp_product);
         }
         return response()->json($products);
     }
+    public function show_debug($user_id)
+    {
+        $shoppingcarts = Shoppingcart::where('user_id', $user_id)->get();
+        $products = array();
+        foreach ($shoppingcarts as $shoppingcart) {
+            $temp  = Product::find($shoppingcart->product_id);
+            $temp_product =[
+                "shoppingcart_id" => $shoppingcart->id,
+                "product_id" => $temp->id,
+                "product_name" => $temp->name,
+                "product_description" => $temp->description,
+                "category_id" => $temp->category_id,
+                "level_id" => $temp->level_id,
+                "file_path" => $temp->file_path,
+                'quantity' => $shoppingcart->quantity,
+                "total_price" => $shoppingcart->price,
+            ];
+            //$temp  = Product::find($shoppingcart->product_id);
+            array_push($products, $temp_product);
+        }
+        return response()->json($products);
+    }
+
 
     public function update(Request $request)
     {
         $user_id = $request->input('user_id');
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity');
+        $product_price = Product::where('product_id', $product_id)->value('price');
         $shoppingcart_id = Shoppingcart::where('user_id', $user_id)->where('product_id', $product_id)->value('id');
         $shoppingcart = Shoppingcart::find($shoppingcart_id);
         $shoppingcart->update([
-            'quantity' => $quantity
+            'quantity' => $quantity,
+            'price' => $product_price * $quantity
         ]);
         return response()->json($shoppingcart);
     }
@@ -121,7 +164,8 @@ class ShoppingcartController extends Controller
         $shoppingcart_id = Shoppingcart::where('user_id', $user->id)->where('product_id', $product->id)->value('id');
         $shoppingcart = Shoppingcart::find($shoppingcart_id);
         $shoppingcart->update([
-            'quantity' => $quantity
+            'quantity' => $quantity,
+            'price' => $product->price * $quantity
         ]);
         return response()->json($shoppingcart);
     }

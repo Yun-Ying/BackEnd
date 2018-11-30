@@ -36,7 +36,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('shopping_carts', 'Api\ShoppingcartController@store');
     //delete
     Route::delete('shopping_carts', 'Api\ShoppingcartController@destroy');
-    //show not OKAY yet
+    //show
     Route::get('shopping_carts/{user_id}', 'Api\ShoppingcartController@show');
     //update
 
@@ -61,6 +61,7 @@ Route::get('deletecart_debug/{x}', 'Api\ShoppingcartController@fake_destroy');
 Route::get('putincart_debug/{user}/{product}/{x}', 'Api\ShoppingcartController@fake_store');
 Route::get('users/{x}', 'Api\ShoppingcartController@fake_index');
 Route::get('shopping_carts/update_debug/{user}/{product}/{quantity}', 'Api\ShoppingcartController@fake_update');
+Route::get('shopping_carts_debug/{user_id}', 'Api\ShoppingcartController@show_debug');
 
 //order part to test and debug
 //create //done
