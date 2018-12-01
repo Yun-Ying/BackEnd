@@ -117,10 +117,11 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
+        $levels = Level::all();
 
         $data = [
-            'product' => $product,
             'categories' => $categories,
+            'levels' => $levels,
         ];
 
         return view('products.edit', $data);
