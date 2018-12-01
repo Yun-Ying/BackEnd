@@ -156,6 +156,15 @@ class OrderController extends Controller
             //user name
             $user_name = User::find($order->user_id)->name;
 
+            //order phone number
+            $phone_number = $order->phone_number;
+
+            //order address
+            $address = $order->address;
+
+            //is_checked
+            $is_check = $order->is_check;
+
             //order_id
             $order_id = $order->id;
 
@@ -193,10 +202,14 @@ class OrderController extends Controller
             $temp_order = [
                 'user_name' => $user_name,
                 'user_email' => $user_email,
+                'address' => $address,
+                'phone_number'=> $phone_number,
+                'is_checked' => $is_check,
                 'order_id' => $order_id,
                 'created_date' =>$created_date,
                 'total_price' => $total_price,
                 'products' => $products,
+
             ];
 
 
@@ -228,6 +241,16 @@ class OrderController extends Controller
             //order_id
             $order_id = $order->id;
 
+            //order phone number
+            $phone_number = $order->phone_number;
+
+            //order address
+            $address = $order->address;
+
+            //is_checked
+            $is_check = $order->is_check;
+
+
             //created_date
             $created_date = $order->created_at;
 
@@ -262,10 +285,14 @@ class OrderController extends Controller
             $temp_order = [
                 'user_name' => $user_name,
                 'user_email' => $user_email,
+                'address' => $address,
+                'phone_number'=> $phone_number,
+                'is_checked' => $is_check,
                 'order_id' => $order_id,
                 'created_date' =>$created_date,
                 'total_price' => $total_price,
                 'products' => $products,
+
             ];
 
 
@@ -298,6 +325,15 @@ class OrderController extends Controller
             //order_id
             $order_id = $order->id;
 
+            //order phone number
+            $phone_number = $order->phone_number;
+
+            //order address
+            $address = $order->address;
+
+            //is_checked
+            $is_check = $order->is_check;
+
             //created_date
             $created_date = $order->created_at;
 
@@ -332,10 +368,14 @@ class OrderController extends Controller
             $temp_order = [
                 'user_name' => $user_name,
                 'user_email' => $user_email,
+                'address' => $address,
+                'phone_number'=> $phone_number,
+                'is_checked' => $is_check,
                 'order_id' => $order_id,
                 'created_date' =>$created_date,
                 'total_price' => $total_price,
                 'products' => $products,
+
             ];
 
 
@@ -368,6 +408,15 @@ class OrderController extends Controller
             //order_id
             $order_id = $order->id;
 
+            //order phone number
+            $phone_number = $order->phone_number;
+
+            //order address
+            $address = $order->address;
+
+            //is_checked
+            $is_check = $order->is_check;
+
             //created_date
             $created_date = $order->created_at;
 
@@ -402,10 +451,14 @@ class OrderController extends Controller
             $temp_order = [
                 'user_name' => $user_name,
                 'user_email' => $user_email,
+                'address' => $address,
+                'phone_number'=> $phone_number,
+                'is_checked' => $is_check,
                 'order_id' => $order_id,
                 'created_date' =>$created_date,
                 'total_price' => $total_price,
                 'products' => $products,
+
             ];
 
 
