@@ -27,7 +27,7 @@ Route::post('register', 'Api\AuthController@register');
 Route::post('login', 'Api\AuthController@login');
 //test
 Route::get('shopping_carts/{user_id}', 'Api\ShoppingcartController@show');
-Route::get('orders/{user_id}', 'Api\OrderController@show');
+
 
 Route::middleware('auth:api')->group(function () {
 
@@ -45,13 +45,14 @@ Route::middleware('auth:api')->group(function () {
     //update
     Route::post('shopping_carts/update', 'Api\ShoppingcartController@update');
 
+
     //order part
 
     //create
     Route::post('orders', 'Api\OrderController@create');
 
     //show
-
+    Route::get('orders/{user_id}', 'Api\OrderController@show');
 
     //index(only for admin)
     Route::get('orders', 'Api\OrderController@index');
@@ -59,6 +60,8 @@ Route::middleware('auth:api')->group(function () {
     //delete
     Route::delete('orders', 'Api\OrderController@destroy');
 });
+
+
 
 
 Route::get('deletecart_debug/{x}', 'Api\ShoppingcartController@fake_destroy');
