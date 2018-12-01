@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -74,8 +75,35 @@ class OrderController extends Controller
 
     }
 
-    public function show()
+    public function show(Order $order)
     {
-        return "show page!\n";
+        $items = array();
+
+
+        for($i=0; $i<count($order->product_ids); $i++)
+        {
+            $product = Product::find($order->product_ids[$i]);
+
+
+            $item = [
+                'name' => $product->name,
+                'id' => $product->id,
+                'file_path' => $product->file_path,
+                'price' => $product->price,
+                'quantity' => $order->quantities[$i],
+                'total' => $product->price * $order->quantities[$i],
+            ];
+
+            array_push($items, $item);
+        }
+
+
+        $data = [
+            'order' => $order,
+            'items' => $items,
+        ];
+
+
+        return view('orders.detail', $data);
     }
 }

@@ -41,8 +41,6 @@ class ProductController extends Controller
             'levels' => $levels,
         ];
 
-
-
         return view('products.create', $data);
     }
 
@@ -122,6 +120,7 @@ class ProductController extends Controller
         $data = [
             'categories' => $categories,
             'levels' => $levels,
+            'product' => $product,
         ];
 
         return view('products.edit', $data);
@@ -139,7 +138,6 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'price' => 'required|integer',
-            'unit' => 'required',
             'description' => 'required',
         ]);
 

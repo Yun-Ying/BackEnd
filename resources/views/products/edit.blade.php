@@ -69,10 +69,14 @@
                                     <label for="price">價格</label>
                                     <input type="number" class="form-control" id="price" name="price" placeholder="請輸入價格" value="{{ old('price', $product->price) }}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="unit">單位</label>
-                                    <input type="text" class="form-control" id="unit" name="unit" placeholder="請輸入單位" value="{{ old('unit', $product->unit) }}">
-                                </div>
+                                    <div class="form-group">
+                                        <label for="level">等級</label>
+                                        <select id="level" name="level_id" class="form-control">
+                                            @foreach($levels as $level)
+                                                <option value="{{ $level->id }}"{{ (old('level_id', $product->level_id) == $level->id)? ' selected' : '' }}>{{ $level->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 <div class="form-group">
                                     <label for="description">描述</label>
                                     <textarea class="form-control" id="description" rows="5" name="description" placeholder="請輸入描述">{{ old('description', $product->description) }}</textarea>
