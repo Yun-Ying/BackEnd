@@ -48,7 +48,7 @@
                             <tr>
                                 <td>{{ $product->id }}.</td>
                                 <td>{{ $product->name }}</td>
-                                <td>{{ $product->category->name }}</td>
+                                <td style = "text-align: center" >{{ $product->category->name }}</td>
                                 <td>{{ $product->price }} 元/{{ $product->unit }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('products.edit', $product->id) }}" class="btn btn-xs btn-primary">編輯</a>
