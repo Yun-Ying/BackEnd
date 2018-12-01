@@ -146,7 +146,6 @@ class OrderController extends Controller
     {
         //now you get a order array
         $user_orders = Order::where('user_id', $user_id)->get();
-
         $orders = array();
 
         foreach ($user_orders as $order)

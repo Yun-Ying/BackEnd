@@ -22,6 +22,13 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
+    public function indexCategory($category_id)
+    {
+        $products = Product::where('category_id', $category_id)->get();
+
+        return response()->json($products);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -20,10 +20,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('products', 'Api\ProductController@index');
 Route::get('products/{product}', 'Api\ProductController@show');
 Route::get('users', 'Api\UserController@index');
+Route::get('products/categories/{id}', 'Api\ProductController@indexCategory');
 //Route::get('shoppingcarts', 'Api\ShoppingcartController@index');
 
 Route::post('register', 'Api\AuthController@register');
 Route::post('login', 'Api\AuthController@login');
+//test
+Route::get('shopping_carts/{user_id}', 'Api\ShoppingcartController@show');
+Route::get('orders/{user_id}', 'Api\OrderController@show');
 
 Route::middleware('auth:api')->group(function () {
 
@@ -35,11 +39,11 @@ Route::middleware('auth:api')->group(function () {
     //create
     Route::post('shopping_carts', 'Api\ShoppingcartController@store');
     //delete
-    Route::delete('shopping_carts', 'Api\ShoppingcartController@destroy');
+    Route::delete('shopping_carts/{shoppingcart}', 'Api\ShoppingcartController@destroy');
     //show
-    Route::get('shopping_carts/{user_id}', 'Api\ShoppingcartController@show');
-    //update
 
+    //update
+    Route::post('shopping_carts/update', 'Api\ShoppingcartController@update');
 
     //order part
 
@@ -47,7 +51,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('orders', 'Api\OrderController@create');
 
     //show
-    Route::get('orders/{user_id}', 'Api\OrderController@show');
+
 
     //index(only for admin)
     Route::get('orders', 'Api\OrderController@index');

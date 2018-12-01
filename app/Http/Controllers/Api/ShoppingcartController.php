@@ -47,7 +47,7 @@ class ShoppingcartController extends Controller
         $user_id = $request->input('user_id');
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity');
-        $product_price = Product::where('product_id', $product_id)->value('price');
+        $product_price = Product::where('id', $product_id)->value('price');
         Shoppingcart::create([
             'user_id' => $user_id,
             'product_id' => $product_id,
@@ -71,13 +71,13 @@ class ShoppingcartController extends Controller
             'success' => true,
         ]);
     }
-    public function destroy(Request $request)
+    public function destroy(Shoppingcart $shoppingcart)
     {
         //$user_id = $request->input('user_id');
         //$product_id = $request->input('product_id');
         //$shoppingcart_id = Shoppingcart::where('user_id', $user_id)->where('product_id', $product_id)->value('id');
-        $shoppingcart_id = $request->input('shopping_cart_id');
-        $shoppingcart = Shoppingcart::find($shoppingcart_id);
+        //$shoppingcart = Shoppingcart::find($shoppingcart_id);
+        //$shoppingcart->delete();
         $shoppingcart->delete();
         return response()->json([
             'success' => true,
@@ -113,6 +113,7 @@ class ShoppingcartController extends Controller
                 "level_id" => $temp->level_id,
                 "file_path" => $temp->file_path,
                 'quantity' => $shoppingcart->quantity,
+                'price' => $temp->price,
                 "total_price" => $shoppingcart->price,
             ];
             //$temp  = Product::find($shoppingcart->product_id);
@@ -149,7 +150,7 @@ class ShoppingcartController extends Controller
         $user_id = $request->input('user_id');
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity');
-        $product_price = Product::where('product_id', $product_id)->value('price');
+        $product_price = Product::where('id', $product_id)->value('price');
         $shoppingcart_id = Shoppingcart::where('user_id', $user_id)->where('product_id', $product_id)->value('id');
         $shoppingcart = Shoppingcart::find($shoppingcart_id);
         $shoppingcart->update([
