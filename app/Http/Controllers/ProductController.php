@@ -141,7 +141,23 @@ class ProductController extends Controller
             'description' => 'required',
         ]);
 
-        $product->update($request->all());
+        //get the id of current product
+        $id = $product->id;
+        $file_path = '';
+
+
+        // do the save process
+        if ($request->hasFile('file')) {
+            $name = $id;
+
+            $request->file('file')->storeAs('public/products', $name.'.jpg')    ;
+
+            $file_path = 'storage/products/'.$name.'.jpg';
+        }
+
+        $product->file_path = $file_path;
+
+        $product->save();
 
         return redirect()->route('products.index');
     }
