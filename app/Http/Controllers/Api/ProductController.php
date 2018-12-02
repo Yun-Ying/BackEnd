@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\ProductResource;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,14 +17,20 @@ class ProductController extends Controller
     {
         $products = Product::orderBy('id')->get();
 
-
         return response()->json($products);
     }
 
     public function indexCategory($category_id)
     {
-        $products = Product::where('category_id', $category_id)->get();
-
+        if ($category_id == -7) {
+            $products = Product::where('category_id', '<', 7)->get();
+        }
+        else if($category_id == -11) {
+            $products = Product::where('category_id', '>', 11)->get();
+        }
+        else {
+            $products = Product::where('category_id', $category_id)->get();
+        }
         return response()->json($products);
     }
 
