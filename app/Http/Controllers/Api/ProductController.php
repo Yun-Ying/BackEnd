@@ -15,9 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('id')->get();
-
-        return response()->json($products);
+        $products = Product::orderBy('id','DESC');
+        $PP = $products->get();
+        return response()->json($PP);
     }
 
     public function indexCategory($category_id)
@@ -31,6 +31,28 @@ class ProductController extends Controller
         else {
             $products = Product::where('category_id', $category_id)->get();
         }
+        return response()->json($products);
+    }
+
+    public function indexCategoryPage($category_id, $list, $page, Request $request)
+    {
+        if($list == 'Grid') $quantity = 9;
+        else $quantity = 5;
+        $sortBy = $request->input('sortBy');
+        $method = $request->input('method');
+        $products = Product::orderBY($sortBy, $method);
+        if ($category_id == -7) {
+            $products = $products->where('category_id', '<', 7);
+        }
+        else if($category_id == -11) {
+            $products = $products->where('category_id', '>', 11);
+        }
+        else {
+            $products = $products->where('category_id', $category_id);
+        }
+
+        $products = $products->skip($page * $quantity)->take($quantity)->get();
+
         return response()->json($products);
     }
 

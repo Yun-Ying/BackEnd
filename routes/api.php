@@ -21,12 +21,13 @@ Route::get('products', 'Api\ProductController@index');
 Route::get('products/{product}', 'Api\ProductController@show');
 Route::get('users', 'Api\UserController@index');
 Route::get('products/categories/{id}', 'Api\ProductController@indexCategory');
+Route::get('products/{category_id}/{list}/{page}', 'Api\ProductController@indexCategoryPage');
 //Route::get('shoppingcarts', 'Api\ShoppingcartController@index');
 
 Route::post('register', 'Api\AuthController@register');
 Route::post('login', 'Api\AuthController@login');
-//test
-Route::get('shopping_carts/{user_id}', 'Api\ShoppingcartController@show');
+//test test test test
+
 
 
 Route::middleware('auth:api')->group(function () {
@@ -35,18 +36,19 @@ Route::middleware('auth:api')->group(function () {
     Route::get('me', 'Api\AuthController@me');
     Route::post('refresh', 'Api\AuthController@refresh');
 
-    //shopping cart part
+    //****shopping cart part****
+
     //create
     Route::post('shopping_carts', 'Api\ShoppingcartController@store');
     //delete
     Route::delete('shopping_carts/{shoppingcart}', 'Api\ShoppingcartController@destroy');
     //show
-
+    Route::get('shopping_carts/{user_id}', 'Api\ShoppingcartController@show');
     //update
     Route::post('shopping_carts/update', 'Api\ShoppingcartController@update');
 
 
-    //order part
+    //***order part****
 
     //create
     Route::post('orders', 'Api\OrderController@create');
