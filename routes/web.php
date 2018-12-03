@@ -26,6 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('products/{product}', 'ProductController@update')->name('products.update');
     Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy');
 
+    //pagging
+    Route::get('pagging/{pages}', 'ProductController@pagging')->name('products.pagging');
+
     //orders
     Route::get('orders', 'OrderController@index')->name('orders.index');
     Route::get('orders/create', 'OrderController@create')->name('orders.create');

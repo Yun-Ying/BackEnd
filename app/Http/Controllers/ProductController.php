@@ -15,6 +15,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $products = Product::orderBy('id', 'DESC')->get();
@@ -23,7 +24,8 @@ class ProductController extends Controller
             'products' => $products,
         ];
 
-        return view('products.index', $data);
+        //set default
+        return $this->pagging(0);
     }
 
     /**
@@ -176,5 +178,22 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('products.index');
+    }
+
+    //sort and pagging
+    public function pagging($page)
+    {
+        $products = Product::orderBy('id', 'DESC')
+            ->skip($page*10)
+            ->take(10)
+            ->get();
+        $total_pages = Product::get()->count() / 10;
+
+        $data = [
+            'products' => $products,
+            'total_pages' => $total_pages,
+        ];
+
+        return view('products.index', $data);
     }
 }

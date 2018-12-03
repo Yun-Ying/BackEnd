@@ -38,10 +38,10 @@
                     <div class="box-body">
                         <table class="table table-bordered">
                             <tr>
-                                <th class="text-center" style="width: 10px;">#</th>
-                                <th class="text-center">名稱</th>
-                                <th class="text-center" style="width: 250px">分類</th>
-                                <th class="text-center" style="width: 120px">價格</th>
+                                <th class="text-center" style="width: 10px;"><a href="">#</a></th>
+                                <th class="text-center"><a href="">名稱</a></th>
+                                <th class="text-center" style="width: 250px"><a href="">分類</a></th>
+                                <th class="text-center" style="width: 120px"><a href="">價格</a></th>
                                 <th class="text-center" style="width: 120px">管理功能</th>
                             </tr>
                             @foreach ($products as $product)
@@ -65,11 +65,9 @@
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
                         <ul class="pagination pagination-sm no-margin pull-right">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">&raquo;</a></li>
+                            @for($i=0; $i<$total_pages; $i++)
+                                <li><a href="{{ route('products.pagging', $i) }}">{{$i+1}}</a></li>
+                            @endfor
                         </ul>
                     </div>
                 </div>

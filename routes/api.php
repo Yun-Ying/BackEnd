@@ -63,7 +63,17 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('orders', 'Api\OrderController@destroy');
 });
 
+//findpassword
+Route::post('findpassword', 'Api\FindPasswordController@find');
+//test find password
+Route::get('testFind/{user_id}', 'Api\FindPasswordController@testFind');
+//mail
+Route::post('mailTo', 'Api\FindPasswordController@mail');
+//reset
+Route::post('resetpassword', 'Api\FindPasswordController@reset');
 
+//tests reset done
+// Route::get('testreset/{id}/{password}', 'Api\FindPasswordController@testreset');
 
 
 Route::get('deletecart_debug/{x}', 'Api\ShoppingcartController@fake_destroy');
