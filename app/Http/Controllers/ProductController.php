@@ -25,7 +25,7 @@ class ProductController extends Controller
         ];
 
         //set default
-        return $this->pagging(0);
+        return $this->pagging(0, 'id','ASC', 0);
     }
 
     /**
@@ -178,18 +178,34 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('products.index');
-    }
+}
 
     //sort and pagging
-    public function pagging($page)
+    public function pagging(Request $request)
     {
-        $products = Product::orderBy('id', 'DESC')
+        $category_id = $request->input('category_id');
+        $sortBy = $request->input('sortBy');
+        $sortMethod = $request->input('sortMethod');
+        $page = $request->input('page');
+        if($category_id == 0) {
+            $products = Product::orderBy($sortBy, $sortMethod);
+        }
+        else {
+            $products = Product::orderBy('id', $sortMethod)
+                ->where('category_id', $category_id);
+        }
+        $total_pages = $products->get()->count() / 10;
+        $products = $products
             ->skip($page*10)
             ->take(10)
             ->get();
-        $total_pages = Product::get()->count() / 10;
+        $categories = Category::all();
 
         $data = [
+            'category_id' => $category_id,
+            'sortBy' => $sortBy,
+            'sortMethod' => $sortMethod,
+            'categories' => $categories,
             'products' => $products,
             'total_pages' => $total_pages,
         ];

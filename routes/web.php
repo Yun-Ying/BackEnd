@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy');
 
     //pagging
-    Route::get('pagging/{pages}', 'ProductController@pagging')->name('products.pagging');
+    Route::get('pagging', 'ProductController@pagging')->name('products.pagging');
 
     //orders
     Route::get('orders', 'OrderController@index')->name('orders.index');

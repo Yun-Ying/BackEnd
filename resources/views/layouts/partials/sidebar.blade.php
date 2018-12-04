@@ -46,7 +46,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('products.index') }}">商品列表</a></li>
+                    <li><a href="{{ route('products.pagging',[ 'category_id'=> 0, 'sortBy' => 'id', 'sortMethod' => 'ASC', 'page'=>0]) }}">商品列表</a></li>
                     <li><a href="{{ route('products.create') }}">新增商品</a></li>
                     <li><a href="{{ route('orders.index') }}">訂單列表</a></li>
                 </ul>
