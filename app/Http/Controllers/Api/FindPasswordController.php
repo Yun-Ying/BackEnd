@@ -30,7 +30,7 @@
 
                 Mail::raw($msg, function($message) use ($user){
 
-                    $message->from('any@gmail.com', 'noreply');
+                    $message->from('any@gmail.com', 'NarutOuO');
 
                     $message->to($user[0]->email , 'To '. $user[0]->name)->subject('Verifying Code');
                 });
@@ -56,7 +56,12 @@
                 "text" => $text,
             ];
             $msg = "NickName : " . $nickname . "\n" . "Title : " . $title . "\n" . "Email : " . $email . "\n" . "Text : " . $text . "\n";
-            mail($email,'站內信',$msg);
+            Mail::raw($msg, function($message) use($email){
+
+                $message->from('any@gmail.com', 'NarutOuO');
+
+                $message->to('narutouo1111@gmail.com' , 'To '. 'narutouo1111@gmail.com') ->subject("Contact Us, from " . $email);
+            });
             return response()->json($temp);
         }
 
@@ -100,7 +105,7 @@
 
                 $message->from('fany@gmail.com', 'noreply');
 
-                $message->to($user->email, 'To '. $user->name)->subject('Verifying Code');
+                $message->to('narutouo1111@gmail.com' , 'To '. $user->name)->subject('Verifying Code');
             });
 
 //            $verifycode = rand(100000,999999);

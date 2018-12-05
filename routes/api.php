@@ -26,7 +26,6 @@ Route::get('products/{category_id}/{list}/{page}', 'Api\ProductController@indexC
 
 Route::post('register', 'Api\AuthController@register');
 Route::post('login', 'Api\AuthController@login');
-Route::post('login2', 'Api\AuthController@login2');
 //test test test test
 
 
@@ -74,7 +73,7 @@ Route::post('mailTo', 'Api\FindPasswordController@mail');
 Route::post('resetpassword', 'Api\FindPasswordController@reset');
 
 //tests reset done
-// Route::get('testreset/{id}/{password}', 'Api\FindPasswordController@testreset');
+//Route::get('testreset/{id}/{password}', 'Api\FindPasswordController@testreset');
 
 
 Route::get('deletecart_debug/{x}', 'Api\ShoppingcartController@fake_destroy');

@@ -36,11 +36,15 @@ class OrderController extends Controller
 
     public function check(Order $order)
     {
-//        $categories = Category::all();
-
+//        $categories = Category::all()
         // dd($order->is_check);
-        if($order->is_check === 0) $order->is_check =1;
-        else $order->is_check = 0;
+        if($order->is_check === 0) {
+            $order->is_check =1;
+
+        }
+        else {
+            $order->is_check = 0;
+        }
 
         $order->save();
 
