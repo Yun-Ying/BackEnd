@@ -472,9 +472,8 @@ class OrderController extends Controller
     }
 
     //not done, since front end request not sure yet
-    public function destroy(Request $request)
+    public function destroy(Order $order)
     {
-        $order = Order::find($request);
 
         $order->delete();
 
