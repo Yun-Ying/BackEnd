@@ -81,9 +81,10 @@
                                     <label for="description">描述</label>
                                     <textarea class="form-control" id="description" rows="5" name="description" placeholder="請輸入描述">{{ old('description', $product->description) }}</textarea>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="width:200px; height:200px">
                                     <label for="cover">產品圖</label>
-                                    <input type="file" id="cover" name = "file">
+                                    <img src="{{'/' . $product->file_path}}" style="max-height: 100%; max-width: 100%; width: auto; height: auto;"/>
+                                    <input type="file" id="cover" name = "file" >
                                 </div>
                             </div>
                             <!-- /.box-body -->

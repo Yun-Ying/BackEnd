@@ -18,14 +18,16 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::orderBy('id', 'DESC')->get();
 
         $data = [
-            'products' => $products,
+            'category_id' => 0,
+            'sortBy' => 'id',
+            'sortMethod' => 'ASC',
+            'page' => 0
         ];
 
         //set default
-        return $this->pagging(0, 'id','ASC', 0);
+        return $this->pagging($data);
     }
 
     /**
@@ -74,27 +76,24 @@ class ProductController extends Controller
         //get the id of current product
         $id = $temProduct->id;
         $file_path = '';
-
-
         // do the save process
         if ($request->hasFile('file')) {
             $name = $id;
-
             $request->file('file')->storeAs('public/products', $name.'.jpg')    ;
-
             $file_path = 'storage/products/'.$name.'.jpg';
         }
-
-
         $tempProduct = Product::find($id);
-
         $tempProduct->file_path = $file_path;
-
         $tempProduct->save();
 
+        $data = [
+            'category_id' => 0,
+            'sortBy' => 'id',
+            'sortMethod' => 'ASC',
+            'page' => 0
+        ];
 
-
-        return redirect()->route('products.index');
+        return redirect()->route('products.pagging', $data);
     }
 
     /**
@@ -145,7 +144,7 @@ class ProductController extends Controller
 
         //get the id of current product
         $id = $product->id;
-        $file_path = '';
+        $file_path = $product->file_path;
 
 
         // do the save process
@@ -161,7 +160,14 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('products.index');
+        $data = [
+            'category_id' => 0,
+            'sortBy' => 'id',
+            'sortMethod' => 'ASC',
+            'page' => 0
+        ];
+
+        return redirect()->route('products.pagging', $data);
     }
 
     /**
@@ -177,7 +183,14 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('products.index');
+        $data = [
+            'category_id' => 0,
+            'sortBy' => 'id',
+            'sortMethod' => 'ASC',
+            'page' => 0
+        ];
+
+        return redirect()->route('products.pagging', $data);
 }
 
     //sort and pagging
