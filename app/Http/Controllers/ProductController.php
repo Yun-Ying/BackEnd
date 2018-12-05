@@ -144,14 +144,19 @@ class ProductController extends Controller
 
         //get the id of current product
         $id = $product->id;
-        $file_path = $product->file_path;
 
+        $file_path = $product->file_path;
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->category_id = $request->input('category_id');
+        $product->level_id = $request->input('level_id');
 
         // do the save process
         if ($request->hasFile('file')) {
             $name = $id;
 
-            $request->file('file')->storeAs('public/products', $name.'.jpg')    ;
+            $request->file('file')->storeAs('public/products', $name.'.jpg');
 
             $file_path = 'storage/products/'.$name.'.jpg';
         }
