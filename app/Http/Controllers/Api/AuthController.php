@@ -52,30 +52,6 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
-    public function login2(Request $request)
-    {
-        $this->validate(
-            $request,
-            [
-                'email' => 'required|string|email',
-                'password' => 'required|string|min:6',
-            ]
-        );
-        $user = User::where('email', $request->input('email'));
-        if($user->isRoot == false) {
-            $credentials = request(['', 'password']);
-        }
-        else {
-            $credentials = request(['email', 'password']);
-        }
-
-        if (! $token = auth('api')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return $this->respondWithToken($token);
-    }
-
     public function logout()
     {
         auth('api')->logout();

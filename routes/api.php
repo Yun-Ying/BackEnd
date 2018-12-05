@@ -26,9 +26,8 @@ Route::get('products/{category_id}/{list}/{page}', 'Api\ProductController@indexC
 
 Route::post('register', 'Api\AuthController@register');
 Route::post('login', 'Api\AuthController@login');
-Route::post('login2', 'Api\AuthController@login2');
 //test test test test
-
+Route::get('orders/{user_id}', 'Api\OrderController@show');
 
 
 Route::middleware('auth:api')->group(function () {
@@ -55,13 +54,13 @@ Route::middleware('auth:api')->group(function () {
     Route::post('orders', 'Api\OrderController@create');
 
     //show
-    Route::get('orders/{user_id}', 'Api\OrderController@show');
+
 
     //index(only for admin)
     Route::get('orders', 'Api\OrderController@index');
 
     //delete
-    Route::delete('orders', 'Api\OrderController@destroy');
+    Route::delete('orders/{order}', 'Api\OrderController@destroy');
 });
 
 //findpassword
