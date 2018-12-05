@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -38,14 +39,16 @@ class OrderController extends Controller
     {
 //        $categories = Category::all()
         // dd($order->is_check);
+        $user = User::where('id', $order->user_id)->first();
         if($order->is_check === 0) {
             $order->is_check =1;
-
+            $user->exp += $order->total_price;
         }
         else {
             $order->is_check = 0;
+            $user->exp -= $order->total_price;
         }
-
+        $user->save();
         $order->save();
 
 
