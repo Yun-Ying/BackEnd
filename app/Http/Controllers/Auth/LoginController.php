@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -35,6 +37,17 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function attemptLogin(Request $request)
+    {
+        $isRoot = User::where('email', $request->input('email'))->first();
+        if ($isRoot->isRoot == true) {
+            return $this->guard()->attempt(
+                $this->credentials($request), $request->has('remember')
+            );
+        }
+        return false;
     }
 
     public function redirectTo()

@@ -26,6 +26,7 @@ Route::get('products/{category_id}/{list}/{page}', 'Api\ProductController@indexC
 
 Route::post('register', 'Api\AuthController@register');
 Route::post('login', 'Api\AuthController@login');
+Route::post('login2', 'Api\AuthController@login2');
 //test test test test
 
 
