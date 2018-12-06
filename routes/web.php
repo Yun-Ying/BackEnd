@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
 
+    //dashboard
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 
     Route::get('products', 'ProductController@index')->name('products.index');
