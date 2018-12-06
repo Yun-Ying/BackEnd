@@ -83,7 +83,7 @@
                                         @foreach($items as $item)
                                         <tr>
                                             <td class="cart_product">
-                                                <a href=""><img src="/{{$item['file_path']}}" alt="profile Pic" height="200" width="300"></a>
+                                                <a href=""><img src="/{{$item['file_path']}}" alt="profile Pic" height="200" width="200"></a>
                                             </td>
                                             <td class="cart_description" >
                                                 <h4><a href="">{{ $item['name'] }}</a></h4>
