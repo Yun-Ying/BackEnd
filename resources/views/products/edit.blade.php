@@ -90,7 +90,7 @@
                             <!-- /.box-body -->
 
                             <div class="box-footer text-right">
-                                <a class="btn btn-link" href="#">取消</a>
+                                <a class="btn btn-link" href="{{ route('products.pagging',['category_id'=> 0,'sortBy' => 'id','sortMethod' => 'ASC', 'page'=>0]) }}">取消</a>
                                 <button type="submit" class="btn btn-primary">更新</button>
                             </div>
                         </form>
