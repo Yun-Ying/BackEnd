@@ -22,7 +22,6 @@ class ShoppingcartController extends Controller
         }
         return response()->json($products);
     }
-
     public function fake_index($user_id)
     {
 
@@ -58,7 +57,6 @@ class ShoppingcartController extends Controller
             'success' => true,
         ]);
     }
-
     public function fake_store(User $user, Product $product, $quantity)
     {
         Shoppingcart::create([
@@ -71,6 +69,7 @@ class ShoppingcartController extends Controller
             'success' => true,
         ]);
     }
+
     public function destroy(Shoppingcart $shoppingcart)
     {
         //$user_id = $request->input('user_id');
@@ -83,7 +82,6 @@ class ShoppingcartController extends Controller
             'success' => true,
         ]);
     }
-
     public function fake_destroy($shoppingcart_id)
     {
 
@@ -103,14 +101,12 @@ class ShoppingcartController extends Controller
         $shoppingcarts = Shoppingcart::where('user_id', $user_id)->get();
         $products = array();
         foreach ($shoppingcarts as $shoppingcart) {
-            $temp  = Product::find($shoppingcart->product_id);
+            //$temp  = Product::find($shoppingcart->product_id);
+            $temp = $shoppingcart->product;
             $temp_product =[
-                "shoppingcart_id" => $shoppingcart->id,
+                "id" => $shoppingcart->id,
                 "product_id" => $temp->id,
                 "product_name" => $temp->name,
-                "product_description" => $temp->description,
-                "category_id" => $temp->category_id,
-                "level_id" => $temp->level_id,
                 "file_path" => $temp->file_path,
                 'quantity' => $shoppingcart->quantity,
                 'price' => $temp->price,
@@ -144,22 +140,18 @@ class ShoppingcartController extends Controller
         return response()->json($products);
     }
 
-
     public function update(Request $request)
     {
-        $user_id = $request->input('user_id');
-        $product_id = $request->input('product_id');
+        $shoppingcart_id = $request->input('shoppingcart_id');
         $quantity = $request->input('quantity');
-        $product_price = Product::where('id', $product_id)->value('price');
-        $shoppingcart_id = Shoppingcart::where('user_id', $user_id)->where('product_id', $product_id)->value('id');
         $shoppingcart = Shoppingcart::find($shoppingcart_id);
+        $product_price = $shoppingcart->product->price;
         $shoppingcart->update([
             'quantity' => $quantity,
             'price' => $product_price * $quantity
         ]);
         return response()->json($shoppingcart);
     }
-
     public function fake_update(User $user, Product $product, $quantity)
     {
         $shoppingcart_id = Shoppingcart::where('user_id', $user->id)->where('product_id', $product->id)->value('id');

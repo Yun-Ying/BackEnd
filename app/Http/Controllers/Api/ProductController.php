@@ -13,49 +13,39 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function easyProduct()
+    {
+        $products = Product::where('level_id', '>', 3)->orderBy('category_id', 'DESC')->take(10)->get();
+        return response()->json($products);
+    }
+    public function strongProduct()
+    {
+        $products = Product::where('level_id', '=', 1)->orderBy('price', 'DESC')->take(10)->get();
+        return response()->json($products);
+    }
+
     public function index()
     {
-        $products = Product::orderBy('id','DESC');
+        $products = Product::orderBy('id','ASC');
         $PP = $products->get();
         return response()->json($PP);
     }
-
     public function indexCategory($category_id)
     {
         if ($category_id == -7) {
             $products = Product::where('category_id', '<', 7)->get();
+
         }
         else if($category_id == -11) {
             $products = Product::where('category_id', '>', 11)->get();
+
         }
         else {
             $products = Product::where('category_id', $category_id)->get();
+
         }
         return response()->json($products);
     }
-
-    public function indexCategoryPage($category_id, $list, $page, Request $request)
-    {
-        if($list == 'Grid') $quantity = 9;
-        else $quantity = 5;
-        $sortBy = $request->input('sortBy');
-        $method = $request->input('method');
-        $products = Product::orderBY($sortBy, $method);
-        if ($category_id == -7) {
-            $products = $products->where('category_id', '<', 7);
-        }
-        else if($category_id == -11) {
-            $products = $products->where('category_id', '>', 11);
-        }
-        else {
-            $products = $products->where('category_id', $category_id);
-        }
-
-        $products = $products->skip($page * $quantity)->take($quantity)->get();
-
-        return response()->json($products);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -65,7 +55,6 @@ class ProductController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -76,7 +65,6 @@ class ProductController extends Controller
     {
         //
     }
-
     /**
      * Display the specified resource.
      *
@@ -87,7 +75,6 @@ class ProductController extends Controller
     {
         return response()->json($product);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -98,7 +85,6 @@ class ProductController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -110,7 +96,6 @@ class ProductController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *

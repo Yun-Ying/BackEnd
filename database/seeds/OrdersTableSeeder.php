@@ -4,7 +4,7 @@
     use App\Product;
     use App\User;
     use Illuminate\Database\Seeder;
-use Faker\Factory;
+    use Faker\Factory;
 
 class OrdersTableSeeder extends Seeder
 {
@@ -17,15 +17,10 @@ class OrdersTableSeeder extends Seeder
     {
         //
         //reset order
-        // Order::truncate();
-
-        $minPrice = 200;
-        $maxPrice = 16584;
+        Order::truncate();
         $total = 50;
 
         $faker = Factory::create();
-
-
         foreach (range(1, $total) as $i) {
 
             //generate products_ids and quantities array
@@ -34,8 +29,8 @@ class OrdersTableSeeder extends Seeder
 
             foreach(range(1, rand(1, 20)) as $unused)
             {
-                array_push($product_ids, rand(1, Product::all()->count()));
-                array_push($quantities, rand(1, 20));
+                array_push($product_ids, rand(1, 50));
+                array_push($quantities, rand(1, 10));
             }
 
             Order::create([
@@ -43,13 +38,23 @@ class OrdersTableSeeder extends Seeder
                 'address' => $faker->address,
                 'phone_number' => '09' .rand(10000000, 99999999),
                 'is_check' => $faker->boolean(50),
-                'total_price' => rand($minPrice, $maxPrice),
+                'total_price' => 0,
                 'product_ids' => $product_ids,
                 'quantities' => $quantities,
                 'created_at' => now()->subDays($total - $i)->addHours(rand(1, 5))->addMinutes(rand(1, 5))->subDays(rand(5, 20)),
                 'updated_at' => now()->subDays($total - $i)->addHours(rand(6, 10))->addMinutes(rand(10, 30))->subDays(rand(6, 12)),
             ]);
         }
-
+        $orders = Order::all();
+        foreach($orders as $order) {
+            $price = 0;
+            for($i = 0; $i < Count($order->product_ids); $i++){
+                $pro = Product::find($order->product_ids[$i]);
+                //$pro = $order->products()->where('id',$order->product_ids[$i])->get();
+                $price += $pro->price *  $order->quantities[$i];
+            }
+            $order->total_price = $price;
+            $order->save();
+        }
     }
 }

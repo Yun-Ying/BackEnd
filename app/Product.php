@@ -25,4 +25,12 @@ class Product extends Model
     {
         return $this->belongsTo(Level::class);
     }
+    public function shoppingcarts()
+    {
+        return $this->hasMany(Shoppingcart::class);
+    }
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

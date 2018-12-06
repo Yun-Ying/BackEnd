@@ -20,14 +20,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('products', 'Api\ProductController@index');
 Route::get('products/{product}', 'Api\ProductController@show');
 Route::get('users', 'Api\UserController@index');
-Route::get('products/categories/{id}', 'Api\ProductController@indexCategory');
+Route::get('products/categories/{category_id}', 'Api\ProductController@indexCategory');
 Route::get('products/{category_id}/{list}/{page}', 'Api\ProductController@indexCategoryPage');
+Route::get('easyProduct','Api\ProductController@easyProduct');
+Route::get('strongProduct','Api\ProductController@strongProduct');
 //Route::get('shoppingcarts', 'Api\ShoppingcartController@index');
 
 Route::post('register', 'Api\AuthController@register');
 Route::post('login', 'Api\AuthController@login');
 //test test test test
-Route::get('orders/{user_id}', 'Api\OrderController@show');
+Route::get('shopping_carts/{user_id}', 'Api\ShoppingcartController@show');
 
 
 Route::middleware('auth:api')->group(function () {
@@ -43,7 +45,7 @@ Route::middleware('auth:api')->group(function () {
     //delete
     Route::delete('shopping_carts/{shoppingcart}', 'Api\ShoppingcartController@destroy');
     //show
-    Route::get('shopping_carts/{user_id}', 'Api\ShoppingcartController@show');
+
     //update
     Route::post('shopping_carts/update', 'Api\ShoppingcartController@update');
 
@@ -54,7 +56,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('orders', 'Api\OrderController@create');
 
     //show
-
+    Route::get('orders/{user_id}', 'Api\OrderController@show');
 
     //index(only for admin)
     Route::get('orders', 'Api\OrderController@index');
