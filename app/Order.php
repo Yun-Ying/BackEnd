@@ -29,14 +29,4 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function shoppingcarts()
-    {
-        return $this->hasMany(Shoppingcart::class);
-    }
-
-    public function products()
-    {
-        return $this->hasMany(Product::class);
-    }
 }

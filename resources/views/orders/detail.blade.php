@@ -39,7 +39,9 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th class="text-center" style="width: 10px;">订单ID</th>
-                                    <th class="text-center" style="width: 50px;">使用者ID</th>
+                                    <th class="text-center" style="width: 50px;">買家ID</th>
+                                    <th class="text-center" style="width: 50px;">買家名稱</th>
+                                    <th class="text-center" style="width: 50px;">買家Email</th>
                                     <th class="text-center" style="width: 120px">地址</th>
                                     <th class="text-center" style="width: 50px">電話</th>
                                     <th class="text-center" style="width: 50px">價錢</th>
@@ -49,6 +51,8 @@
                                     <tr>
                                         <td>{{ $order->id }}.</td>
                                         <td>{{ $order->user_id }}</td>
+                                        <td>{{ $order->user->name }}</td>
+                                        <td>{{ $order->user->email }}</td>
                                         <td>{{ $order->address }}</td>
                                         <td>{{ $order->phone_number }}</td>
                                         <td>{{ $order->total_price }}.00</td>
@@ -83,20 +87,20 @@
                                         @foreach($items as $item)
                                         <tr>
                                             <td class="cart_product">
-                                                <a href=""><img src="/{{$item['file_path']}}" alt="profile Pic" height="200" width="200"></a>
+                                                <a href=""><img src="/{{$item['file_path']}}" alt="profile Pic"style="width:auto; height:auto; max-height: 200px; max-width: 200px;"></a>
                                             </td>
                                             <td class="cart_description" >
                                                 <h4><a href="">{{ $item['name'] }}</a></h4>
                                                 <p>Product ID : {{ $item['id'] }}</p>
                                             </td>
                                             <td class="cart_price">
-                                                <p>{{ $item['price'] }}</p>
+                                                <p style="font-size: 20px; vertical-align: middle">{{ $item['price'] }}</p>
                                             </td>
                                             <td class="cart_quantity">
-                                                <p>{{ $item['quantity'] }}</p>
+                                                <p style="font-size: 20px; vertical-align: middle">{{ $item['quantity'] }}</p>
                                             </td>
                                             <td class="cart_total">
-                                                <p>{{ $item['total'] }}</p>
+                                                <p style="font-size: 20px; vertical-align: middle">{{ $item['total'] }}</p>
                                             </td>
 
                                         </tr>

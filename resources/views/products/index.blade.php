@@ -77,7 +77,7 @@
                                 <td>{{ $product->id }}.</td>
                                 <td>{{ $product->name }}</td>
                                 <td style = "text-align: center" >{{ $product->category->name }}</td>
-                                <td>{{ $product->price }} 元/{{ $product->unit }}</td>
+                                <td>{{ $product->price }} 元</td>
                                 <td class="text-center">
                                     <a href="{{ route('products.edit', $product->id) }}" class="btn btn-xs btn-primary">編輯</a>
                                     <form action="{{ route('products.destroy', $product->id) }}" method="post" style="display: inline-block">

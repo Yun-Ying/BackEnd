@@ -29,8 +29,4 @@ class Product extends Model
     {
         return $this->hasMany(Shoppingcart::class);
     }
-    public function order()
-    {
-        return $this->belongsTo(Order::class);
-    }
 }
