@@ -21,7 +21,7 @@ class ShoppingCartTableSeeder extends Seeder
 
         foreach (range(1, $total) as $user_id) {
             $quantity = rand(1, 100);
-            $product_id = rand(1, Product::all()->count());
+            $product_id = rand(1, 300);
             Shoppingcart::create([
                 'user_id' => rand(1, User::all()->count()),
                 'product_id' => $product_id,

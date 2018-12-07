@@ -70,12 +70,13 @@ class ProductController extends Controller
             'level_id' => $request->input('level_id'),
             'description' => $request->input('description'),
         ]);
-
+        $temProduct->level = $temProduct->Level->name;
+        $temProduct->category = $temProduct->Category->name;
         $temProduct->save();
 
         //get the id of current product
         $id = $temProduct->id;
-        $file_path = '';
+        $file_path = 'storage/products/default.png';
         // do the save process
         if ($request->hasFile('file')) {
             $name = $id;
@@ -151,6 +152,8 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         $product->category_id = $request->input('category_id');
         $product->level_id = $request->input('level_id');
+        $product->level = $product->Level->name;
+        $product->category = $product->Category->name;
 
         // do the save process
         if ($request->hasFile('file')) {

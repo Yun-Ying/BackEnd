@@ -17,7 +17,7 @@ class OrdersTableSeeder extends Seeder
     {
         //
         //reset order
-        Order::truncate();
+        //Order::truncate();
         $total = 50;
 
         $faker = Factory::create();
@@ -29,7 +29,7 @@ class OrdersTableSeeder extends Seeder
 
             foreach(range(1, rand(1, 20)) as $unused)
             {
-                array_push($product_ids, rand(1, 50));
+                array_push($product_ids, rand(1, 300));
                 array_push($quantities, rand(1, 10));
             }
 
