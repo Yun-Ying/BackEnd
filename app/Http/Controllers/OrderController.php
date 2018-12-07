@@ -26,6 +26,8 @@ class OrderController extends Controller
         return view('orders.index', $data);
     }
 
+
+
     public function edit(Order $order)
     {
         $data = [
