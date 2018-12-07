@@ -15,13 +15,15 @@ class Product extends Model
         'category_id',
         'level_id',
         'file_path',
+        'category',
+        'level'
     ];
 
-    public function category()
+    public function Category()
     {
         return $this->belongsTo(Category::class);
     }
-    public function level()
+    public function Level()
     {
         return $this->belongsTo(Level::class);
     }
