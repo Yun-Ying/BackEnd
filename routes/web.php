@@ -39,6 +39,38 @@ Route::middleware('auth')->group(function () {
     Route::delete('orders/{order}', 'OrderController@destroy')->name('orders.destroy');
     Route::patch('orders/{order}', 'OrderController@update')->name('orders.update');
 
+    //users
+    //index
+    Route::get('users', 'UserController@index')->name('users.index');
+    //create
+    Route::get('users/create', 'UserController@create')->name('users.create');
+    //edit
+    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
+    //store
+    Route::post('users', 'UserController@store')->name('users.store');
+    //show personal information, might not used
+    Route::get('users/{user}/show', 'UserController@show')->name('users.show');
+    //delete
+    Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
+    //update information
+    Route::patch('users/{user}', 'UserController@update')->name('users.update');
+
+    //categories
+    //index
+    Route::get('categories', 'CategoryController@index')->name('categories.index');
+    //create
+    Route::get('categories/create', 'CategoryController@create')->name('categories.create');
+    //edit
+    Route::get('categories/{category}/edit', 'CategoryController@edit')->name('categories.edit');
+    //store
+    Route::post('categories', 'CategoryController@store')->name('categories.store');
+    //show categories information, might not used
+    Route::get('categories/{category}/show', 'CategoryController@show')->name('categories.show');
+    //delete
+    Route::delete('categories/{category}', 'CategoryController@destroy')->name('categories.destroy');
+    //update information
+    Route::patch('categories/{category}', 'CategoryController@update')->name('categories.update');
+
 });
 
 Auth::routes();

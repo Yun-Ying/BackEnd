@@ -63,6 +63,7 @@ class ProductController extends Controller
             'description' => 'required',
         ]);
 
+
         $temProduct = new Product([
             'name' => $request->input('name'),
             'category_id' => $request->input('category_id'),
@@ -72,7 +73,10 @@ class ProductController extends Controller
         ]);
         $temProduct->level = $temProduct->Level->name;
         $temProduct->category = $temProduct->Category->name;
+
         $temProduct->save();
+
+
 
         //get the id of current product
         $id = $temProduct->id;
