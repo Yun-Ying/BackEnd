@@ -42,6 +42,7 @@
                     <li><a href="{{ route('orders.index') }}">訂單列表</a></li>
                     {{--<li><a href="{{ route('users.index') }}">使用者列表</a></li>--}}
                     <li><a href="{{ route('categories.index') }}">分类列表</a></li>
+                    <li><a href="{{ route('users.index') }}">使用者列表</a></li>
                 </ul>
             </li>
         </ul>

@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::orderBy('id', 'ASC')->get();
+        $categories = Category::orderBy('id', 'DECS')->get();
 
         $data = [
             'categories' => $categories,

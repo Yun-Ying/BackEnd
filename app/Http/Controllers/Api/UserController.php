@@ -13,5 +13,6 @@ class UserController extends Controller
     {
         $users = User::orderBy('id')->get();
         return response()->json($users);
+
     }
 }

@@ -46,7 +46,7 @@
                             <tr>
                                 <td>{{ $category->id }}.</td>
                                 <td>{{ $category->name }}</td>
-                                @if($category->id != 16)
+                                @if($category->id > 16)
                                 <td class="text-center">
                                     <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-xs btn-primary">編輯</a>
                                     <form action="{{ route('categories.destroy', $category->id) }}" method="post" style="display: inline-block">
@@ -57,9 +57,9 @@
                                 </td>
                                 @endif
 
-                                @if($category->id == 16)
+                                @if($category->id <= 16)
                                     <td class="text-center">
-                                        <span style="font-weight: bold">This is Default Value, Cant be modified!</span>
+                                        <span style="font-weight: bold">This is Default Category, Can't be modified!</span>
                                     </td>
 
                                 @endif

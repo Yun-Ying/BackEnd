@@ -41,19 +41,19 @@ Route::middleware('auth')->group(function () {
 
     //users
     //index
-    Route::get('users', 'UserController@index')->name('users.index');
+    Route::get('users', 'UsersController@index')->name('users.index');
     //create
-    Route::get('users/create', 'UserController@create')->name('users.create');
+    Route::get('users/create', 'UsersController@create')->name('users.create');
     //edit
-    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
+    Route::get('users/{user}/edit', 'UsersController@edit')->name('users.edit');
     //store
-    Route::post('users', 'UserController@store')->name('users.store');
+    Route::post('users', 'UsersController@store')->name('users.store');
     //show personal information, might not used
-    Route::get('users/{user}/show', 'UserController@show')->name('users.show');
+    Route::get('users/{user}/show', 'UsersController@show')->name('users.show');
     //delete
-    Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
+    Route::delete('users/{user}', 'UsersController@destroy')->name('users.destroy');
     //update information
-    Route::patch('users/{user}', 'UserController@update')->name('users.update');
+    Route::patch('users/{user}', 'UsersController@update')->name('users.update');
 
     //categories
     //index

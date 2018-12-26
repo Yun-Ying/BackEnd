@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', '新增商品')
+@section('title', '新增使用者')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -8,12 +8,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                商品管理
+                使用者管理
                 <small></small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> 商品管理</a></li>
-                <li class="active">新增商品</li>
+                <li><a href="#"><i class="fa fa-shopping-bag"></i> 使用者管理</a></li>
+                <li class="active">新增使用者</li>
             </ol>
         </section>
 
@@ -33,7 +33,7 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('products.store') }}" method="post" enctype = "multipart/form-data">
+                        <form role="form" action="{{ route('users.store') }}" method="post">
 
                             @csrf
 
@@ -57,38 +57,26 @@
                                     <input type="text" class="form-control" id="title" name="name" placeholder="請輸入名稱" value="{{ old('name') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="category">分類</label>
-                                    <select id="category" name="category_id" class="form-control">
-                                        @foreach($categories as $category)
-                                        <option value="{{ $category->id }}"{{ (old('category_id') == $category->id)? ' selected' : '' }}>{{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="email">邮箱</label>
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="請輸入邮箱" value="{{ old('email') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="price">價格</label>
-                                    <input type="text" class="form-control" id="price" name="price" placeholder="請輸入價格" value="{{ old('price') }}">
-                                </div>
-                                    <div class="form-group">
-                                        <label for="level">等級</label>
-                                        <select id="level" name="level_id" class="form-control">
-                                            @foreach($levels as $level)
-                                                <option value="{{ $level->id }}"{{ (old('level_id') == $level->id)? ' selected' : '' }}>{{ $level->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                <div class="form-group">
-                                    <label for="description">描述</label>
-                                    <textarea class="form-control" id="description" name="description" rows="5" placeholder="請輸入描述">{{ old('description') }}</textarea>
+                                    <label for="password">密码</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="請輸入密码" value="{{ old('password') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="cover">產品圖</label>
-                                    <input type="file" id="cover" name="file">
+                                    <input type="checkbox" id="isRoot" name="isRoot"><span style="font-weight: bold">是否为管理者</span>
                                 </div>
-                            </div>
+                                <div class="exp-group">
+                                    <label for="exp">经验值</label>
+                                    <input type="range" id="exp" name="exp" value="{{ old('exp') }}" min="0" max="50000"></div>
+                                    <span id = "output"></span>
+                                </div>
+
                             <!-- /.box-body -->
 
                             <div class="box-footer text-right">
-                                <a class="btn btn-link" href="{{ route('products.pagging',['category_id'=> 0,'sortBy' => 'id','sortMethod' => 'ASC', 'page'=>0]) }}">取消</a>
+                                <a class="btn btn-link" href="{{ route('users.index') }}">取消</a>
                                 <button type="submit" class="btn btn-primary">新增</button>
                             </div>
                         </form>
@@ -104,4 +92,60 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+    {{--css--}}
+    <style>
+        .exp-group {
+            width: 100%; /* Width of the outside container */
+        }
+
+        /* The slider itself */
+        #exp {
+            -webkit-appearance: none;  /* Override default CSS styles */
+            appearance: none;
+            width: 100%; /* Full-width */
+            height: 25px; /* Specified height */
+            background: #d3d3d3; /* Grey background */
+            outline: none; /* Remove outline */
+            opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+            -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+            transition: opacity .2s;
+        }
+
+        /* Mouse-over effects */
+        #exp:hover {
+            opacity: 1; /* Fully shown on mouse-over */
+        }
+
+        /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+        #exp::-webkit-slider-thumb {
+            -webkit-appearance: none; /* Override default look */
+            appearance: none;
+            width: 25px; /* Set a specific slider handle width */
+            height: 25px; /* Slider handle height */
+            background: #4CAF50; /* Green background */
+            cursor: pointer; /* Cursor on hover */
+        }
+
+        #exp::-moz-range-thumb {
+            width: 25px; /* Set a specific slider handle width */
+            height: 25px; /* Slider handle height */
+            background: #4CAF50; /* Green background */
+            cursor: pointer; /* Cursor on hover */
+        }
+
+    </style>
+
+    {{--js part--}}
+<script>
+    let slider = document.getElementById("exp");
+    let output = document.getElementById("output");
+    output.innerHTML = slider.value; // Display the default slider value
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+    }
+</script>
+
 @endsection
