@@ -24,7 +24,7 @@ Route::get('products/{product}', 'Api\ProductController@show');
 Route::get('products/categories/{category_id}', 'Api\ProductController@indexCategory');
 Route::get('easyProduct','Api\ProductController@easyProduct');
 Route::get('strongProduct','Api\ProductController@strongProduct');
-
+Route::get('othersCategory', 'Api\CategoryController@index');
 //login and register
 Route::post('register', 'Api\AuthController@register');
 Route::post('login', 'Api\AuthController@login');
