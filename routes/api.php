@@ -81,11 +81,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('rotationAd', 'Api\AdvertisementController@rotation');
 });
 
-    Route::get('sliderAd', 'Api\AdvertisementController@slider');
-
-    //rotation
-    Route::get('rotationAd', 'Api\AdvertisementController@rotation');
-
 
 
 //tests reset done
