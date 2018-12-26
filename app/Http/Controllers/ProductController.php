@@ -84,7 +84,7 @@ class ProductController extends Controller
         // do the save process
         if ($request->hasFile('file')) {
             $name = $id;
-            $request->file('file')->storeAs('public/products', $name.'.jpg')    ;
+            $request->file('file')->storeAs('public/products', $name.'.jpg');
             $file_path = 'storage/products/'.$name.'.jpg';
         }
         $tempProduct = Product::find($id);

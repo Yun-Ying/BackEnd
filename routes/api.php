@@ -71,7 +71,20 @@ Route::middleware('auth:api')->group(function () {
 
     //delete
     Route::delete('orders/{order}', 'Api\OrderController@destroy');
+
+
+    //advertisement part
+    //slider
+    Route::get('sliderAd', 'Api\AdvertisementController@slider');
+
+    //rotation
+    Route::get('rotationAd', 'Api\AdvertisementController@rotation');
 });
+
+    Route::get('sliderAd', 'Api\AdvertisementController@slider');
+
+    //rotation
+    Route::get('rotationAd', 'Api\AdvertisementController@rotation');
 
 
 

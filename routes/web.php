@@ -71,6 +71,22 @@ Route::middleware('auth')->group(function () {
     //update information
     Route::patch('categories/{category}', 'CategoryController@update')->name('categories.update');
 
+    //advertisements
+    //index
+    Route::get('advertisements', 'AdvertisementController@index')->name('advertisements.index');
+    //create
+    Route::get('advertisements/create', 'AdvertisementController@create')->name('advertisements.create');
+    //edit
+    Route::get('advertisements/{advertisement}/edit', 'AdvertisementController@edit')->name('advertisements.edit');
+    //store
+    Route::post('advertisements', 'AdvertisementController@store')->name('advertisements.store');
+    //show advertisements information, might not used
+    Route::get('advertisements/{advertisement}/show', 'AdvertisementController@show')->name('advertisements.show');
+    //delete
+    Route::delete('advertisements/{advertisement}', 'AdvertisementController@destroy')->name('advertisements.destroy');
+    //update information
+    Route::patch('advertisements/{advertisement}', 'AdvertisementController@update')->name('advertisements.update');
+
 });
 
 Auth::routes();
