@@ -56,7 +56,7 @@
                                 <td style="text-align: center">
                                         @if($advertisement->is_used  == 0)
                                             Unpaid
-                                        @elseif($advertisement->is_used  == 1)
+                                        @elseif($advertisement->is_used  == 2)
                                             Slide
                                         @else
                                             Rotate
@@ -103,7 +103,7 @@
                                     <td style="text-align: center">
                                         @if($advertisement->is_used  == 0)
                                             Unpaid
-                                        @elseif($advertisement->is_used  == 1)
+                                        @elseif($advertisement->is_used  == 2)
                                             Slide
                                         @else
                                             Rotate
@@ -154,7 +154,7 @@
                                     <td style="text-align: center">
                                         @if($advertisement->is_used  == 0)
                                             Unpaid
-                                        @elseif($advertisement->is_used  == 1)
+                                        @elseif($advertisement->is_used  == 2)
                                             Slide
                                         @else
                                             Rotate
@@ -205,7 +205,7 @@
                                     <td style="text-align: center">
                                         @if($advertisement->is_used  == 0)
                                             Unpaid
-                                        @elseif($advertisement->is_used  == 1)
+                                        @elseif($advertisement->is_used  == 2)
                                             Slide
                                         @else
                                             Rotate
