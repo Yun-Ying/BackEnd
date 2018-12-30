@@ -109,24 +109,14 @@ class UsersController extends Controller
 
         $this->validate($request, [
             'name' => 'required|string|max:255',
-            'password' => 'required|string|min:6',
             'email' => [
                 'required', 'string', 'email', 'max:255',
                 Rule::unique('users')->ignore($user->id),
             ],
         ]);
 
-        $tempUser = new User([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password'=>Hash::make($request->input('password')),
-            'exp' => $request->input('exp'),
-            'isRoot' => $request->has('isRoot') ? 1 : 0,
-        ]);
-
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
         $user->exp = $request->input('exp');
         $user->isRoot =$request->has('isRoot') ? 1 : 0;
 
