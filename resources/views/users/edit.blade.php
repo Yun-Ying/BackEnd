@@ -62,7 +62,7 @@
                                     <input type="text" class="form-control" id="email" name="email" placeholder="請輸入邮箱" value="{{ old('email', $user->email) }}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="checkbox" id="isRoot" name="isRoot"><span style="font-weight: bold">是否为管理者</span>
+                                    {{Form::checkbox('isRoot', 'value', $user->isRoot == 1 ? true : false)}}<span style="font-weight: bold">是否为管理者</span>
                                 </div>
                                 <div class="exp-group">
                                     <label for="exp">经验值</label>
