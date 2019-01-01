@@ -51,7 +51,11 @@
                                 <td>{{ $user->id }}.</td>
                                 <td>{{ $user->name }}</td>
                                 <td style = "text-align: center" >{{ $user->email }}</td>
-                                <td>{{ $user->isRoot ? "是":"否" }}</td>
+                                @if($user->isRoot)
+                                    <td style="background-color: lawngreen">是</td>
+                                @else
+                                    <td style="background-color: indianred">否</td>
+                                @endif
                                 <td>{{ $user->exp }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-primary">編輯</a>

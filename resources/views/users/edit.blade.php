@@ -63,10 +63,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="password">密码</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="請輸入密码" value=""{{old('password', $user->password)}}>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="請輸入密码" value="{{old('password', $user->password)}}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="checkbox" id="isRoot" name="isRoot"><span style="font-weight: bold">是否为管理者</span>
+                                    <input type="checkbox" id="isRoot" name="isRoot" value="{{old('isRoot', $user->isRoot)}}"><span style="font-weight: bold">是否为管理者</span>
                                 </div>
                                 <div class="exp-group">
                                     <label for="exp">经验值</label>

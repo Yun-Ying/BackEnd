@@ -66,7 +66,8 @@
                                 <div class="is_used-group" id="is_used_group">
                                     <label for="is_used">使用状态</label>
                                     <p style="font-weight: bold">0为不被使用</p>
-                                    <p style="font-weight: bold">1和2为使用中</p>
+                                    <p style="font-weight: bold">1為Rotation</p>
+                                    <p style="font-weight: bold">2為Slider</p>
                                     <input type="range" class="form-control" id="is_used" name="is_used" value="{{ old('is_used', $advertisement->is_used) }}" min="0" max="2">
                                     <p id = "output" style="font-weight: bold"></p>
 
