@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1a7484c5eeb587a6317219e1b2ce1b6",
+    "content-hash": "706005fea8092a7c5144dbbd610923c5",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1354,7 +1354,7 @@
                 {
                     "name": "Luís Otávio Cobucci Oblonczyk",
                     "email": "lcobucci@gmail.com",
-                    "role": "developer"
+                    "role": "Developer"
                 }
             ],
             "description": "A simple library to work with JSON Web Token and JSON Web Signature",

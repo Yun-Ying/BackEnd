@@ -130,12 +130,13 @@ class AdvertisementController extends Controller
             'file' => 'required|image',
         ]);
 
-        $advertisement->update($request->all());
+
 
         //change the image
         $request->file('file')->storeAs('public/advertisements', 'advertisement'.$advertisement->id.'.jpg');
         $file_path = asset('storage/advertisements/advertisement'.$advertisement->id.'.jpg');
-
+        $advertisement->update($request->all());
+        $advertisement->save();
         return redirect()->route('advertisements.index');
     }
 
