@@ -62,15 +62,12 @@
                                     <input type="text" class="form-control" id="email" name="email" placeholder="請輸入邮箱" value="{{ old('email', $user->email) }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">密码</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="請輸入密码" value="{{old('password', $user->password)}}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" id="isRoot" name="isRoot" value="{{old('isRoot', $user->isRoot)}}"><span style="font-weight: bold">是否为管理者</span>
+                                    {{Form::checkbox('isRoot', 'value', $user->isRoot == 1 ? true : false)}}<span style="font-weight: bold">是否为管理者</span>
                                 </div>
                                 <div class="exp-group">
                                     <label for="exp">经验值</label>
-                                    <input type="range" id="exp" name="exp" value="{{ old('exp', $user->exp) }}" min="0" max="50000"></div>
+                                    <input type="range" id="exp" name="exp" value="{{ old('exp', $user->exp) }}" min="0" max="50000">
+                                </div>
                                 <span id = "output"></span>
                             </div>
                             <!-- /.box-body -->
